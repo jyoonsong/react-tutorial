@@ -3,10 +3,10 @@ import User from './User';
 
 export default class UserList extends Component {
 	renderUsers = () => {
-		const {users} = this.props;
-		return users.map(user =>
+		const {users} = this.props; // const users = this.props.users;
+		return users.map(user => (
 			<User key={user.id} user={user} />
-		);
+		));
 	}	
 
 	render() {
