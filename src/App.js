@@ -1,37 +1,50 @@
 import React, { Component } from 'react';
 import UserList from './components/UserList';
+import { Map, List } from 'immutable';
+
 
 class App extends Component {
 
 	id = 3 // 이미 0,1,2가 존재
 	
 	state = {
-		input: '',
-		users: [
-			{ id: 1, username: 'jaeyoon' },
-			{ id: 2, username: 'song' }
-		]
+		data: Map({
+			input: '',
+			users: List([
+				Map({ id: 1, username: 'jaeyoon' }),
+				Map({ id: 2, username: 'song' })
+			])
+		})
 	}
 
 	onChange = (e) => {
+		const {value} = e.target;
+		const {data} = this.state;
+
 		this.setState({
-			input: e.target.value // input의 다음 바뀔 값
+			data: data.set('input', value)
 		});
 	}
 
 	onButtonClick = (e) => {
-		this.setState(({ users, input }) => ({
-			input: '',
-			users: users.concat({
-				id: this.id++,
-				username: input
-			})
-		}))
+		const {data} = this.state;
+
+		this.setState({
+			data: data.set('input', '') // input: ''
+								.update('users', users => users.push( // users.concat 새 Map을 추가
+									Map({
+										id: this.id++,
+										username: data.get('input') // data.input은 불가능
+									})
+								))
+		})
 	}
 
   render() {
   	// this 생략을 위해
-  	const {input, users} = this.state;
+  	const {data} = this.state;
+  	const input = data.get('input');
+  	const users = data.get('users');
   	const {onChange, onButtonClick} = this;
 
     return (
