@@ -1,0 +1,29 @@
+@import 'utils';
+
+.button {
+  background: green;
+  transition: all .2s ease-in;
+  display: inline-block;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  text-align: center;
+  color: white;
+  position: fixed;
+  font-size: 2rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+
+  @include place-at-center();
+
+  width: 1200px;
+
+  // 마우스 상태에 따라 다른 효과 지정
+  &:hover {
+    background: yellowgreen;
+  }
+  &:active {
+    margin-top: 3px;
+    background: darkred;
+  }
+}
