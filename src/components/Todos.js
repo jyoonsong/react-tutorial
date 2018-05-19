@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Map } from 'immutable';
 
-const Todos = ({ id, text, checked, onToggle, onRemove }) => {
+const TodoItem = ({ id, text, checked, onToggle, onRemove }) => {
   return (
     <li 
     	style={{ textDecoration: checked ? 'line-through' : 'none' }}
@@ -16,7 +16,7 @@ const Todos = ({todos, input, onInsert, onToggle, onRemove, onChange}) => {
   
   const todoItems = todos.map(
 		todo => {
-			const { id, checked, text } = todo.toJS();
+			const { id, checked, text } = todo.toJS(); // Immutable의 Map으로 된 것을 일반 객체로 변환
 			return (
 				<TodoItem 
 					id={id}
